@@ -1,0 +1,26 @@
+{
+  "builders": [
+    {
+      "type": "qemu",
+      "iso_url": "https://vault.centos.org/6.9/isos/x86_64/CentOS-6.9-x86_64-minimal.iso",
+      "iso_checksum": "md5:af4a1640c0c6f348c6c41f1ea9e192a2",
+      "output_directory": "output",
+      "shutdown_command": "echo 'packer' | sudo -S shutdown -P now",
+      "disk_size": "5000M",
+      "format": "qcow2",
+      "accelerator": "hvf",
+      "http_directory": "http",
+      "ssh_username": "root",
+      "ssh_password": "nutanix/4u",
+      "ssh_timeout": "20m",
+      "headless": true,
+      "vm_name": "centos6.qcow2",
+      "net_device": "virtio-net",
+      "disk_interface": "virtio",
+      "boot_wait": "10s",
+      "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos6-ks.cfg<enter><wait>"
+      ]
+    }
+  ]
+}
